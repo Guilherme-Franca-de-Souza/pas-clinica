@@ -4,13 +4,57 @@ public class Teste {
 	
 	public static void main(String[] args) {
 		
-		DataBase database = new DataBase();
-		database.createTable(Medico.class);
-		Medico medico = new Medico("Dr. José");
-		database.insert(medico);
 		
-		Medico medico2 = (Medico) database.getElement(Medico.class, 0);
+		// TODO: LISTAR MÉDICOS DISPONÍVEIS PARA O PROCEDIMENTO ESCOLHIDO PELO PACIENTE
+		
+		BancoDeDados database = BancoDeDados.getInstance();
+		
+		database.createTable(Medico.class);
+		database.createTable(Paciente.class);
+		
+		ClinicaFacade cFacade = new ClinicaFacade();
+		
+		cFacade.RegistrarPaciente("Jose");
+		cFacade.MudaNomePaciente("Jose", "Joao"); 
+		
+		Object result = database.select(Paciente.class, "Joao"); // Chamada do método que retorna o objeto ou null
+
+		if (result != null) {
+	    	Paciente medicoCast = (Paciente) result;
+	        String nome = medicoCast.getNome();
+	        System.out.println(nome);
+		} else {
+		    System.out.println("falhou");
+		}
+		
+		
+		
+		database.insert(new Medico("Dr. José"));
+		
+		
+		database.createTable(Clinica.class);
+		Clinica clinica = new Clinica();
+		database.insert(clinica);
+		
+		
+		Medico medico2 = (Medico) database.select(Medico.class, 0);
 		System.out.println(medico2.getNome());
+
+		
+		
+		result = database.select(Medico.class, "Dr. José"); // Chamada do método que retorna o objeto ou null
+
+		if (result != null) {
+	    	Medico medicoCast = (Medico) result;
+	        String nome = medicoCast.getNome();
+	        System.out.println(nome);
+		} else {
+		    System.out.println("falhou");
+		}
+		
+		//Clinica clinica2 = (Clinica) database.getElementByName(Clinica.class, "Dr. José");
+		//System.out.println(clinica2);
+		
 		
 		//BancoDeDados.getInstance();
 		
@@ -57,7 +101,6 @@ public class Teste {
         //clinicaFacade.CancelarConsulta(3);
         //clinicaFacade.CancelarConsulta(1);
         
-
     }
 
 }

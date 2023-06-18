@@ -33,7 +33,7 @@ class Agenda {
         }
         Consulta consulta = ConsultaFactory.getInstance().criarConsulta(modo, dia, intervalo, medico);
         consultasDia.add(consulta);
-        this.bd.addConsulta(consulta);
+        this.bd.insert(consulta);
         System.out.println("Consulta agendada com sucesso. \n");
         return true;
     }

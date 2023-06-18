@@ -14,18 +14,22 @@ public class ClinicaFacade {
 		
 	}
 	
-	public void RegistrarPaciente(int id, String nome) {
-		this.paciente = new Paciente(id, nome);
-		this.bd.addPaciente(paciente);
+	public void RegistrarPaciente(String nome) {
+		this.paciente = new Paciente(nome);
+		this.bd.insert(paciente);
+	}
+	
+	public void MudaNomePaciente(String nomeAtual, String novoNome) {
+		((Paciente) this.bd.select(Paciente.class, nomeAtual)).setNome(novoNome); ;
 	}
 	
 	public void CancelarConsulta(int id) {
-		this.bd.selectConsulta(id).CancelarConsulta();
+		((Consulta) this.bd.select(Consulta.class, id)).CancelarConsulta();
 	}
 
 	public void AgendarConsulta(int id, Procedimento procedimento, String modo, String dia, String intervalo, Medico medico) {
 			if (verificarPlanoSaude(paciente, procedimento)) {
-				System.out.println("Agendamento do paciente: " + this.bd.selectPaciente(id).getNome());
+				System.out.println("Agendamento do paciente: " + ((Paciente) this.bd.select(Paciente.class, id)).getNome());
 				this.agenda.marcarConsulta(modo, dia, intervalo, medico);
 			} else {
 				System.out.println("Plano de saúde não aceito para o procedimento solicitado.");

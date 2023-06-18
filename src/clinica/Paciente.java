@@ -9,7 +9,7 @@ public class Paciente {
 	private String sexo;
 	private Plano plano;
 	
-	public Paciente (int Id, String nome) {
+	public Paciente (String nome) {
 		this.Id = Id;
 		this.nome = nome;
 	}

@@ -5,8 +5,8 @@ public class Consultorio {
 	private int numero;
 	private Agenda agenda;
 	
-	public Consultorio () {
-		
+	public Consultorio (int numero) {
+		this.numero = numero;
 	}
 
 	public int getNumero() {

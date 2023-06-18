@@ -1,45 +1,51 @@
 package clinica;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
+import java.lang.reflect.Method;
 
 public class BancoDeDados {
-	private List<Paciente> pacientes;
-	private List<Consulta> consultas;
+
+    private Map<String, List> tables;
+    
+    private static BancoDeDados instancia = new BancoDeDados();
 	
-	private static BancoDeDados instancia = new BancoDeDados();
-	
-	public BancoDeDados() {
-		this.pacientes = new ArrayList<Paciente>();
-		this.consultas = new ArrayList<Consulta>();
-	}
 	
 	public static BancoDeDados getInstance() {
         return instancia;
     }
 
-	public void addConsulta(Consulta c) {
-		this.consultas.add(c);
-	}
-	
-	public Consulta selectConsulta(int id) {
-		for (Consulta c : this.consultas) {
-			if (c.getId() == id)
-				return c;
-		}
-		return null;
-	}
-	
-	public void addPaciente(Paciente p) {
-		this.pacientes.add(p);
-	}
+    public BancoDeDados() {
+        tables = new HashMap<>();
+    }
 
-	public Paciente selectPaciente(int id) {
-		for (Paciente p : this.pacientes) {
-			if (p.getId() == id)
-				return p;
-		}
-		return null;
-	}
+    public void createTable(Class<?> clazz) {
+        List list = new ArrayList();
+        tables.put(clazz.getName(), list);
+    }
 
+    public void insert(Object obj) {
+        List list = tables.get(obj.getClass().getName());
+        list.add(obj);
+    }
+
+    public Object select(Class<?> clazz, int index) {
+        List list = tables.get(clazz.getName());
+        return list.get(index);
+    }
+
+    public Object select(Class<?> clazz, String name) {
+        List<?> list = tables.get(clazz.getName());
+        for (Object obj : list) {
+            try {
+                Method method = obj.getClass().getMethod("getNome");
+                Object result = method.invoke(obj);
+                if (result != null && result.equals(name)) {
+                    return obj;
+                }
+            } catch (Exception e) {
+                return null;
+            }
+        }
+        return null;
+    }
 }
