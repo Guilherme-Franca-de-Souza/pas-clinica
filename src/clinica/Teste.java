@@ -5,7 +5,17 @@ public class Teste {
 	public static void main(String[] args) {
 		
 		
-		// TODO: LISTAR MÉDICOS DISPONÍVEIS PARA O PROCEDIMENTO ESCOLHIDO PELO PACIENTE
+		
+		
+		// TODO: CLIENTE VAI INFORMAR PLANO(OU NAO) E ESPECIALIDADE 
+		// VERIFICA SE A CLINICA ATENDE PELO PLANO, SE NAO, OFERECE PARTICULAR
+		// PRIMEIRO ITERA SOBRE A TABELA DE ESPECIALIDADE DA CLINICA, SE NÃO TIVER LA, RECUSA
+		// SE TIVER LA, ITERA SOBRE A TABELA DE ESPECIALIDADES DO PLANO
+		// SE NAO TIVER LA, OFERECE CONSULTA PARTICULAR
+		// SE TIVER LA, GERA CONSULTA A PARTIR DO PLANO
+		
+		// TODO: LISTAR MÉDICOS DISPONÍVEIS PARA A ESPECIALIDADE ESCOLHIDA PELO PACIENTE
+		// MOSTRAR AGENDA DE CADA UM DELES E PEDIR PRO PACIENTE ESCOLHER (ultima etapa do atendimento)
 		
 		BancoDeDados database = BancoDeDados.getInstance();
 		
@@ -29,7 +39,7 @@ public class Teste {
 		
 		
 		
-		database.insert(new Medico("Dr. José"));
+		//database.insert(new Medico("Dr. José"));
 		
 		
 		database.createTable(Clinica.class);

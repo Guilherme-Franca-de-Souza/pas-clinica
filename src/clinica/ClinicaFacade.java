@@ -27,8 +27,8 @@ public class ClinicaFacade {
 		((Consulta) this.bd.select(Consulta.class, id)).CancelarConsulta();
 	}
 
-	public void AgendarConsulta(int id, Procedimento procedimento, String modo, String dia, String intervalo, Medico medico) {
-			if (verificarPlanoSaude(paciente, procedimento)) {
+	public void AgendarConsulta(int id, String especialidade, String modo, String dia, String intervalo, Medico medico) {
+			if (verificarPlanoSaude(paciente, especialidade)) {
 				System.out.println("Agendamento do paciente: " + ((Paciente) this.bd.select(Paciente.class, id)).getNome());
 				this.agenda.marcarConsulta(modo, dia, intervalo, medico);
 			} else {
@@ -36,7 +36,7 @@ public class ClinicaFacade {
 			}
 	}
 		
-	private boolean verificarPlanoSaude(Paciente paciente, Procedimento procedimento) {
+	private boolean verificarPlanoSaude(Paciente paciente, String especialidade) {
 		return true; 
 	}
 }

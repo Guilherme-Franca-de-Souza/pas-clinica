@@ -10,7 +10,6 @@ public class Paciente {
 	private Plano plano;
 	
 	public Paciente (String nome) {
-		this.Id = Id;
 		this.nome = nome;
 	}
 	

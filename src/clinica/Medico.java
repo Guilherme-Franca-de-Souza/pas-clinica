@@ -1,20 +1,23 @@
 package clinica;
 
+import java.util.List;
+
 public class Medico {
 	private String nome;
 	private int crm;
 	private Consultorio consultorio;
-	private Especialidade especialidade;
+	private List<String> especialidades;
 	
-	public Medico (String nome) {
+	public Medico (String nome, List<String> especialidades) {
 		this.nome = nome;
+		this.especialidades = especialidades;
 	}
 	
 	public String getNome() {
 		return nome;
 	}
 
-	public void setNome(String nome) {
+	public void setNome(String nome, List<String> especialidades) {
 		this.nome = nome;
 	}
 
@@ -34,11 +37,11 @@ public class Medico {
 		this.consultorio = consultorio;
 	}
 
-	public Especialidade getEspecialidade() {
-		return especialidade;
+	public List<String> getEspecialidade() {
+		return this.especialidades;
 	}
 
-	public void setEspecialidade(Especialidade especialidade) {
-		this.especialidade = especialidade;
+	public void setEspecialidade(String especialidade) {
+		this.especialidades.add(especialidade);
 	}
 }

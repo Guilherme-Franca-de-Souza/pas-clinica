@@ -3,11 +3,12 @@ package clinica;
 public class Plano {
 	
 	private String nome;
-	private TabelaProcedimentos tabela_procedimentos;
+	private TabelaEspecialidades tabela_especialidades;
 	private int cobertura;
 	
-	public Plano() {
-		
+	public Plano(String nome, int cobertura) {
+		this.nome = nome;
+		this.cobertura = cobertura;
 	}
 
 	public String getNome() {
@@ -18,12 +19,12 @@ public class Plano {
 		this.nome = nome;
 	}
 
-	public TabelaProcedimentos getTabela_procedimentos() {
-		return tabela_procedimentos;
+	public TabelaEspecialidades getTabela_especialidades() {
+		return tabela_especialidades;
 	}
 
-	public void setTabela_procedimentos(TabelaProcedimentos tabela_procedimentos) {
-		this.tabela_procedimentos = tabela_procedimentos;
+	public void setTabela_especialidades(TabelaEspecialidades tabela_especialidades) {
+		this.tabela_especialidades = tabela_especialidades;
 	}
 
 	public int getCobertura() {
