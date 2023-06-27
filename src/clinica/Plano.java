@@ -2,13 +2,20 @@ package clinica;
 
 public class Plano {
 	
+	private int id;
 	private String nome;
 	private TabelaEspecialidades tabela_especialidades;
 	private int cobertura;
 	
 	public Plano(String nome, int cobertura) {
+		Id gerador = Id.getInstance();
+        this.id = gerador.gerarId("");
 		this.nome = nome;
 		this.cobertura = cobertura;
+	}
+
+	public int getId() {
+		return id;
 	}
 
 	public String getNome() {

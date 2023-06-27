@@ -18,23 +18,28 @@ class Agenda {
     public static Agenda getInstance() {
         return instancia;
     }
-
-    public boolean marcarConsulta(String modo, String dia, String intervalo, Medico medico) {
-        if (!consultas.containsKey(dia)) {
+    
+    public boolean verificiarDisponibilidade(String dia, String intervalo, Medico medico) {
+    	List<Consulta> consultasDia = consultas.get(dia);
+ 
+    	if (!consultas.containsKey(dia)) {
             consultas.put(dia, new ArrayList<>());
+            return true;
         }
-
-        List<Consulta> consultasDia = consultas.get(dia);
+    	
         for (Consulta consulta : consultasDia) {
             if (consulta.getIntervalo().equals(intervalo) && consulta.getMedico().equals(medico)) {
-                System.out.println("Já existe uma consulta marcada com o mesmo médico neste intervalo de tempo. \n");
                 return false;
             }
         }
-        Consulta consulta = ConsultaFactory.getInstance().criarConsulta(modo, dia, intervalo, medico);
-        consultasDia.add(consulta);
-        this.bd.insert(consulta);
-        System.out.println("Consulta agendada com sucesso. \n");
         return true;
+    }
+
+    public void marcarConsulta(String dia, Consulta consulta) {
+        if (!consultas.containsKey(dia)) {
+            consultas.put(dia, new ArrayList<>());
+        }
+        List<Consulta> consultasDia = consultas.get(dia);
+        consultasDia.add(consulta);
     }
 }

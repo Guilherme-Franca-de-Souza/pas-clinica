@@ -2,7 +2,7 @@ package clinica;
 
 public class Paciente {
 	
-	private int Id;
+	private int id;
 	private String nome;
 	private int rg;
 	private String data_de_nascimento;
@@ -10,12 +10,14 @@ public class Paciente {
 	private Plano plano;
 	
 	public Paciente (String nome) {
+		Id gerador = Id.getInstance();
+        this.id = gerador.gerarId("Paciente");
 		this.nome = nome;
 	}
 	
 	
 	public int getId() {
-		return Id;
+		return id;
 	}
 	
 	public Plano getPlano() {

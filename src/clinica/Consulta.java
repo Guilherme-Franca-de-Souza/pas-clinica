@@ -3,6 +3,7 @@ package clinica;
 public abstract class Consulta {
 	
 	private int id;
+	private String modo;
 	private Fatura fatura;
 	private Paciente paciente;
 	private Consultorio consultorio;
@@ -10,16 +11,26 @@ public abstract class Consulta {
 	private String dia;
 	private String intervalo;
 	
-	public Consulta(int id, String dia, String intervalo, Medico medico) {
+	public Consulta(int id, String modo, String dia, String intervalo, Medico medico, Consultorio consultorio) {
 		this.id = id;
+		this.modo = modo;
 		this.dia = dia;
 		this.intervalo = intervalo;
 		this.medico = medico;
+		this.consultorio = consultorio;
 	}
 	
 	public abstract void CancelarConsulta();
 	
 	
+	public String getModo() {
+		return modo;
+	}
+
+	public void setModo(String modo) {
+		this.modo = modo;
+	}
+
 	public int getId() {
 		return id;
 	}

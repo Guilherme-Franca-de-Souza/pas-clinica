@@ -27,10 +27,31 @@ public class BancoDeDados {
         List list = tables.get(obj.getClass().getName());
         list.add(obj);
     }
-
-    public Object select(Class<?> clazz, int index) {
+    
+    public List all(Class<?> clazz) {
         List list = tables.get(clazz.getName());
-        return list.get(index);
+        return list;
+    }
+    
+    public Object selectIndex(Class<?> clazz, int id) {
+        List list = tables.get(clazz.getName());
+        return list.get(id);
+    }
+
+    public Object select(Class<?> clazz, int id) {
+        List list = tables.get(clazz.getName());
+        for (Object obj : list) {
+            try {
+                Method method = obj.getClass().getMethod("getId");
+                Object result = method.invoke(obj);
+                if (result != null && result.equals(id)) {
+                    return obj;
+                }
+            } catch (Exception e) {
+                return null;
+            }
+        }
+        return null;
     }
 
     public Object select(Class<?> clazz, String name) {
@@ -48,4 +69,5 @@ public class BancoDeDados {
         }
         return null;
     }
+    
 }

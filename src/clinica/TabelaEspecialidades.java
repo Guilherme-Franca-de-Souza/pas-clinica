@@ -2,10 +2,11 @@ package clinica;
 
 
 import java.util.Map;
+import java.util.HashMap;
 
 public class TabelaEspecialidades {
 	
-	private Map<String, Double> especialidades;
+	private Map<String, Double> especialidades = new HashMap<>();
 	
 	public TabelaEspecialidades() {
 		

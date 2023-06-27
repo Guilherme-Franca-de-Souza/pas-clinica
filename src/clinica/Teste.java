@@ -5,7 +5,13 @@ public class Teste {
 	public static void main(String[] args) {
 		
 		
+		Seeder sd = new Seeder();
+		sd.seed();
 		
+		ClinicaFacade cf = new ClinicaFacade();
+		
+		//cf.VerificaSeClinicaAtendePlano("Unimed");
+
 		
 		// TODO: CLIENTE VAI INFORMAR PLANO(OU NAO) E ESPECIALIDADE 
 		// VERIFICA SE A CLINICA ATENDE PELO PLANO, SE NAO, OFERECE PARTICULAR
@@ -17,6 +23,10 @@ public class Teste {
 		// TODO: LISTAR MÉDICOS DISPONÍVEIS PARA A ESPECIALIDADE ESCOLHIDA PELO PACIENTE
 		// MOSTRAR AGENDA DE CADA UM DELES E PEDIR PRO PACIENTE ESCOLHER (ultima etapa do atendimento)
 		
+		
+		
+		
+		/*
 		BancoDeDados database = BancoDeDados.getInstance();
 		
 		database.createTable(Medico.class);
@@ -61,6 +71,7 @@ public class Teste {
 		} else {
 		    System.out.println("falhou");
 		}
+		*/
 		
 		//Clinica clinica2 = (Clinica) database.getElementByName(Clinica.class, "Dr. José");
 		//System.out.println(clinica2);

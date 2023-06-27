@@ -1,5 +1,10 @@
 package clinica;
 
+import java.util.List;
+import java.util.Map;
+import java.lang.reflect.Method;
+import java.util.HashMap;
+
 public class ClinicaFacade {
 	
 	private BancoDeDados bd;
@@ -18,25 +23,44 @@ public class ClinicaFacade {
 		this.paciente = new Paciente(nome);
 		this.bd.insert(paciente);
 	}
-	
-	public void MudaNomePaciente(String nomeAtual, String novoNome) {
-		((Paciente) this.bd.select(Paciente.class, nomeAtual)).setNome(novoNome); ;
-	}
-	
+		
 	public void CancelarConsulta(int id) {
 		((Consulta) this.bd.select(Consulta.class, id)).CancelarConsulta();
 	}
-
-	public void AgendarConsulta(int id, String especialidade, String modo, String dia, String intervalo, Medico medico) {
-			if (verificarPlanoSaude(paciente, especialidade)) {
-				System.out.println("Agendamento do paciente: " + ((Paciente) this.bd.select(Paciente.class, id)).getNome());
-				this.agenda.marcarConsulta(modo, dia, intervalo, medico);
-			} else {
-				System.out.println("Plano de saúde não aceito para o procedimento solicitado.");
+	
+	public boolean VerificaSeClinicaAtendeEspecialidade(String especialidade) {
+		Map<String, Double> especialidades = ((TabelaEspecialidades) bd.selectIndex(TabelaEspecialidades.class, 0)).getEspecialidades();
+		for (String chave : especialidades.keySet()) {
+			if (especialidade.equals(chave)) {
+				return true;
 			}
+		}
+		return false;
 	}
-		
-	private boolean verificarPlanoSaude(Paciente paciente, String especialidade) {
-		return true; 
+	
+	public boolean VerificaSeClinicaAtendePlano(String planoNome) {
+		List planos = bd.all(Plano.class);
+        for (Object plano : planos) {
+        	System.out.println(  ((Plano) plano).getNome() );
+        	if (((Plano) plano).getNome().equals(planoNome)) {
+        		return true;
+        	}
+        }
+        return false;
 	}
+	
+	public boolean GerarFatura(Consulta consulta) {
+		return true;
+	}
+	
+	public boolean VerificaSePlanoAtendeEspecialidade(Plano plano, String especialidade) {
+		Map<String, Double> especialidades = plano.getTabela_especialidades().getEspecialidades();
+		for (String chave : especialidades.keySet()) {
+			if (especialidade.equals(chave)) {
+				return true;
+			}
+		}
+		return false;
+	}
+	
 }

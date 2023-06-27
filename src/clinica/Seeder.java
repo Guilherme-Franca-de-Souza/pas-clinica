@@ -13,13 +13,13 @@ public class Seeder {
 		
 		// Cria as tabelas
 		db.createTable(Medico.class); 
-		db.createTable(Clinica.class); // Tem -> TabelaProcedimentos
 		db.createTable(Consultorio.class);
 		db.createTable(Paciente.class); // Tem -> Resonsável, Fatura
 		db.createTable(Plano.class); // Tem -> TabelaProcedimentos
 		db.createTable(TabelaEspecialidades.class);
 		
 		
+		//Preenche as tabelas
 		
 		TabelaEspecialidades te = new TabelaEspecialidades();
 		te.insertEspecialidade("Cardiologia", 450.00);
@@ -28,12 +28,11 @@ public class Seeder {
 		te.insertEspecialidade("Dermatologia", 360.90);
 		db.insert(te);
 		
-		//Preenche as tabelas
+		
 		db.insert(new Medico( "Dr. Arlindo", Arrays.asList("Cardiologista")));
 		db.insert(new Medico( "Dr. Bonifácio", Arrays.asList("Ortopedista")));
 		db.insert(new Medico( "Dr. Carlos", Arrays.asList("Oftalmologia", "Dermatologia")));
 		
-
 		db.insert(new Consultorio(1));
 		db.insert(new Consultorio(2));
 		db.insert(new Consultorio(3));
@@ -45,6 +44,7 @@ public class Seeder {
 		teb.insertEspecialidade("Oftalmologia", 70.90);
 		teb.insertEspecialidade("Dermatologia", 160.90);
 		bradesco.setTabela_especialidades(teb);
+		db.insert(bradesco);
 		
 		Plano unimed = new Plano("Unimed", 100);
 		TabelaEspecialidades teu = new TabelaEspecialidades();
@@ -53,6 +53,7 @@ public class Seeder {
 		teu.insertEspecialidade("Oftalmologia", 270.90);
 		teu.insertEspecialidade("Dermatologia", 360.90);
 		unimed.setTabela_especialidades(teu);
+		db.insert(unimed);
 		
 		Plano amil = new Plano("Amil", 0);
 		TabelaEspecialidades tea = new TabelaEspecialidades();
@@ -61,6 +62,7 @@ public class Seeder {
 		tea.insertEspecialidade("Oftalmologia", 370.90);
 		tea.insertEspecialidade("Dermatologia", 460.90);
 		amil.setTabela_especialidades(tea);
+		db.insert(amil);
 		
 		Plano notredame = new Plano("Notredame", 66);
 		TabelaEspecialidades ten = new TabelaEspecialidades();
